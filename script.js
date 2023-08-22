@@ -112,8 +112,13 @@ const linkedListFactory = () => {
 	};
 
 	const insertAt = (value, index) => {
-		if (index > length) {
+		if (index > length || index < 0) {
 			return null;
+		} else if (index === 0) {
+			let newNode = nodeFactory(value, head);
+			head = newNode;
+			length++;
+			return { newNode };
 		}
 		let currentNode = head;
 		for (let i = 0; i < index - 1; i++) {
@@ -176,7 +181,9 @@ l.append(4);
 l.append(5);
 l.append(6);
 l.removeAt(6);
+l.insertAt(12, 0);
 
 console.log(l.toString());
 console.log(l.size());
 console.log(l.getTail());
+console.log(l.getHead());
